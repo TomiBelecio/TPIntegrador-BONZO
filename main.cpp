@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 #include <windows.h>
 
 using namespace std;
@@ -17,51 +18,45 @@ void setColor(int color) {
 
 void cargaDados(int dados[],int);
 
+void pedirNombres(string &jugador1, string &jugador2);
+
+void quienEmpieza(int dados[],string jugador1,string jugador2);
+
+
+
+
+
 int main()
 {
    int TAM = 4;
 int dados[TAM] ={} ;
+string jugador1,jugador2 ;
 int numeroProhibido;
 int contRondas = 0;
 char seguirJugando = 's';
-int jugador1, jugador2;
+
 
         srand(static_cast<unsigned int>(time(NULL)));
 
         cargaDados (dados, TAM);
+        
+        pedirNombres(jugador1, jugador2);
+        
+        
     setColor(10);
-  cout << "\t\t\t*\t* * * * * * * * * * * * * * * * * * * * * * * * * * * \t    *"<<endl;
+  setColor(FOREGROUND_GREEN | FOREGROUND_BLUE | BACKGROUND_RED);cout << "\t\t\t*\t* * * * * * * * * * * * * * * * * * * * * * * * * * * \t    *"<<endl;
   setColor(12);cout << "     BONZO :P\t\t\t*\t    SE VA A LANZAR UN DADO!  \t\t    *                 BONZO :P"<<endl;
   cout <<"\t\t\t\t* \t\t\t\t\t\t    *"<< endl;
-  cout << "\t\t\t \t*   SI EL NUMERO QUE CAE ES IMPAR EMPIEZA JUGADOR1  *" <<endl;
-  cout << "\t\t\t \t*   DE LO CONTRARIO EMPIEZA JUGADOR2 \t\t    *" <<endl;
+  cout << "\t\t\t \t*   SI EL NUMERO QUE CAE ES IMPAR EMPIEZA "<< jugador1<<"      *" <<endl;
+  cout << "\t\t\t \t*   DE LO CONTRARIO EMPIEZA "<< jugador2<<" \t\t    *" <<endl;
   cout << "\t\t\t*\t* * * * * * * * * * * * * * * * * * * * * * * * * * *\t    *"<<endl;
     cout << endl;
-    cout << "\t\t\t\t        ->PULSE CUALQUIER TECLA PARA LANZAR<-" <<endl;
-    system("pause");
+    setColor(15);cout << "\t\t\t\t        ->PULSE CUALQUIER TECLA PARA LANZAR<-" <<endl;
+  setColor(1);  system("pause");
 
 
 
-    if (dados[1] % 2 == 0) {
-
-          cout << "\t\t\t\t\t   # # # # # "<< endl;
-      cout << "\t\t\t\t\t   #       # "<< endl;
-      cout << "\t\t\tPAR\t\t   #  ("<<dados[1]<<")  #"<< endl;
-      cout << "\t\t\tEMPIEZA JUGADOR2   #       #"<< endl;
-      cout << "\t\t\t\t\t   # # # # # "<< endl;
-          cout << "\n\t\t\t\t        ->PULSE CUALQUIER TECLA PARA EMPEZAR<-" <<endl;
-          system("pause");
-
-    } else {
-          cout << "\t\t\t\t\t   # # # # # "<< endl;
-      cout << "\t\t\t\t\t   #       # "<< endl;
-      cout << "\t\t\tIMPAR\t\t   #  ("<<dados[1]<<")  #"<< endl;
-      cout << "\t\t\tEMPIEZA JUGADOR1   #       #"<< endl;
-      cout << "\t\t\t\t\t   # # # # # "<< endl;
-          cout << "\n\t\t\t\t        ->PULSE CUALQUIER TECLA PARA EMPEZAR<-" <<endl;
-          system("pause");
-
-    }
+        quienEmpieza(dados,jugador1,jugador2);
 
 
 
@@ -115,3 +110,37 @@ void cargaDados(int dados[],int tam) {
     }
 
 }
+
+// Función para pedir el nombre de los jugadores y confirmar
+void pedirNombres(string &jugador1, string &jugador2) {
+    cout << "Introduce el nombre del Jugador 1: ";
+    getline(cin, jugador1);
+
+    cout << "Introduce el nombre del Jugador 2: ";
+    getline(cin, jugador2);
+    }
+
+    void quienEmpieza(int dados[],string jugador1,string jugador2){
+
+            if (dados[1] % 2 == 0) {
+
+          cout << "\t\t\t\t\t\t   # # # # # "<< endl;
+      cout << "\t\t\t\t\t\t   #       # "<< endl;
+      cout << "\t\t\t\tPAR\t\t   #  ("<<dados[1]<<")  #"<< endl;
+      cout << "\t\t\t\tEMPIEZA:"<<jugador2<<"        #       #"<< endl;
+      cout << "\t\t\t\t\t\t   # # # # # "<< endl;
+        setColor(15);  cout << "\n\t\t\t\t        ->PULSE CUALQUIER TECLA PARA EMPEZAR<-" <<endl;
+          system("pause");
+
+    } else {
+          cout << "\t\t\t\t\t\t   # # # # # "<< endl;
+      cout << "\t\t\t\t\t\t   #       # "<< endl;
+      cout << "\t\t\t\tIMPAR\t\t   #  ("<<dados[1]<<")  #"<< endl;
+      cout << "\t\t\t\tEMPIEZA:"<<jugador1<<"        #       #"<< endl;
+      cout << "\t\t\t\t\t\t   # # # # # "<< endl;
+        setColor(15);  cout << "\n\t\t\t\t        ->PULSE CUALQUIER TECLA PARA EMPEZAR<-" <<endl;
+           system("pause");
+
+    }
+
+    }
